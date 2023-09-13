@@ -44,7 +44,7 @@ static int	philo_routine_b(t_philo *p)
 	else
 		eat_timep(p);
 	action(p, "is sleeping", 0, p->r->tts);
-	action(p, "is thinking", 0, 0);
+	action(p, "is thinking", 0, p->r->ttt);
 	return (0);
 }
 
@@ -52,13 +52,13 @@ static void	philo_routine_c(t_philo *p)
 {
 	if (p->rounds > -1)
 	{
-		if (!p->rounds--)
+		if ((p->rounds--) <= 1)
 		{
 			pthread_mutex_lock(&p->r->end_m);
 			pthread_mutex_lock(&p->r->finish_ph_m);
+			p->r->finish_philos++;
 			if (p->r->finish_philos == p->r->nb_philos - 1)
 				p->r->end = 1;
-			p->r->finish_philos++;
 			pthread_mutex_unlock(&p->r->finish_ph_m);
 			pthread_mutex_unlock(&p->r->end_m);
 		}
@@ -71,9 +71,9 @@ void	*philo_routine(void *arg)
 
 	p = (t_philo *) arg;
 	pthread_mutex_lock(&p->r->goodtogo);
-	pthread_mutex_unlock(&p->r->goodtogo);
+	pthread_mutex_unlock(&p->r->goodtogo); 
 	if (p->nb % 2)
-		usleep(5000);
+		usleep(950);
 	if (pthread_create(&p->is_dead, NULL, is_he_alive, p))
 		return (threadcreateerror(p));
 	pthread_mutex_lock(&p->r->end_m);

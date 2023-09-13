@@ -38,6 +38,7 @@ typedef struct s_rules
 	int					ttd;
 	int					tte;
 	int					tts;
+	int					ttt;
 	int					nb_rounds;
 	int					philo_nb;
 	int					finish_philos;

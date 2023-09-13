@@ -38,6 +38,7 @@ t_rules	*ft_parsing(char **argv)
 	ret->ttd = ft_atoi(argv[2]);
 	ret->tte = ft_atoi(argv[3]);
 	ret->tts = ft_atoi(argv[4]);
+	ret->ttt = 0,9 * (ft_atoi(argv[2]) - (ft_atoi(argv[3]) + ft_atoi(argv[4])));
 	if (argv[5])
 		ret->nb_rounds = ft_atoi(argv[5]);
 	else

@@ -54,7 +54,7 @@ void	*is_he_alive(void *arg)
 			geterror(p);
 		is_he_alive_b(p, time);
 		is_he_alive_c(p);
-		usleep(5000);
+		usleep(500);
 		pthread_mutex_lock(&p->r->end_m);
 	}
 	pthread_mutex_unlock(&p->r->end_m);
